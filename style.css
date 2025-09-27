@@ -1,0 +1,548 @@
+/* --- Design System com Variáveis CSS --- */
+:root {
+    --color-primary-dark: #0A2540;   /* Azul escuro corporativo */
+    --color-primary: #007BFF;       /* Azul vibrante para CTAs e links */
+    --color-primary-light: #0069D9; /* Azul mais escuro para hover */
+
+    --color-text-dark: #212121;      /* Preto para texto principal */
+    --color-text-light: #fff;        /* Branco para texto em fundos escuros */
+
+    --color-bg: #fff;                /* Fundo branco e limpo */
+    --color-bg-surface: #f8f9fa;     /* Cinza muito claro para seções alternadas */
+
+    --font-primary: 'Poppins', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
+
+    --header-height: 70px;
+    --transition-main: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-secondary);
+    line-height: 1.6;
+    background-color: var(--color-bg);
+    color: var(--color-text-dark);
+}
+
+/* --- Utilidades --- */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 2rem;
+    overflow: hidden;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    color: var(--color-primary-dark);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.section-description {
+    text-align: center;
+    max-width: 700px;
+    margin: -1rem auto 3rem;
+    opacity: 0.8;
+}
+
+section {
+    padding: 4rem 0;
+}
+
+/* --- Cabeçalho e Navegação --- */
+header {
+    background-color: var(--color-bg-surface);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed; /* Alterado para position: sticky para melhor comportamento */
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: top 0.3s ease-in-out;
+}
+
+header.header-hidden {
+    top: calc(-1 * var(--header-height));
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--header-height);
+}
+
+.logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 150px;
+}
+
+.menu-toggle {
+    display: none; /* Escondido por padrão em telas grandes */
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Garante que o foco no menu-toggle seja consistente */
+.menu-toggle:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--color-text-dark);
+    font-weight: 700;
+    transition: var(--transition-main);
+}
+
+.nav-links a:hover {
+    color: var(--color-primary);
+}
+
+/* Melhoria de Acessibilidade: Estado de Foco Visível */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+/* --- Seção Hero --- */
+#hero {
+    background: linear-gradient(rgba(10, 37, 64, 0.8), rgba(10, 37, 64, 0.8)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070') no-repeat center center/cover; /* Gradiente com o novo azul escuro */
+    color: var(--color-text-light);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: var(--header-height);
+}
+
+#hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-light);
+    /* Tipografia Fluida */
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+#hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: var(--transition-main);
+}
+
+.cta-button:hover {
+    background-color: var(--color-primary-light);
+}
+
+/* --- Seção de Serviços --- */
+#services {
+    background-color: var(--color-bg-surface);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: var(--color-bg-surface);
+    padding: 2rem;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+    box-shadow: none;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-primary);
+}
+
+.service-card i {
+    font-size: 3rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.service-card h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+/* --- Seção de Clientes --- */
+#clients {
+    background-color: var(--color-bg);
+}
+
+.clients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+}
+
+.client-logo {
+    color: var(--color-text-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.client-logo img,
+.client-logo svg {
+    max-width: 150px;
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: var(--transition-main);
+}
+
+.client-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    transition: var(--transition-main);
+}
+
+.client-logo:hover img, 
+.client-logo:hover svg,
+.client-logo:focus-within img,
+.client-logo:focus-within svg {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.client-logo:hover .client-name,
+.client-logo:focus-within .client-name {
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+/* --- Seções Sobre e Contato --- */
+#about {
+    background-color: var(--color-bg-surface);
+    text-align: center;
+}
+
+#about p {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#contact {
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-light);
+    text-align: center;
+}
+
+#contact h2 {
+    color: var(--color-text-light);
+}
+
+.contact-info p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.contact-info a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: var(--transition-main);
+}
+
+.contact-info a:hover {
+    opacity: 0.8;
+}
+
+/* --- Área de Atendimento --- */
+.service-area-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2rem 0 3rem;
+    flex-wrap: wrap;
+}
+
+.service-area-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--color-primary);
+}
+
+.service-area-item i {
+    font-size: 1.5rem;
+    color: var(--color-bg-surface);
+}
+
+.service-area-text h4 {
+    font-family: var(--font-primary);
+    color: var(--color-text-light);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.service-area-text span {
+    font-size: 0.9rem;
+    color: var(--color-bg);
+}
+
+/* --- Formulário de Contato --- */
+#contact-form {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: var(--color-bg);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-light);
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    transition: var(--transition-main);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-text-light);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+#contact-form .cta-button {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- Rodapé --- */
+footer {
+    background-color: var(--color-text-dark);
+    color: var(--color-text-light);
+    padding: 2rem 0;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-links a {
+    color: var(--color-text-light);
+    font-size: 1.5rem;
+    margin-left: 15px;
+    transition: var(--transition-main);
+}
+
+.social-links a:hover {
+    color: var(--color-primary-light);
+}
+
+/* --- Media Queries para Responsividade --- */
+@media (max-width: 768px) {
+    /* --- Ajustes Gerais --- */
+    h2 {
+        font-size: 2rem;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* --- Cabeçalho e Navegação Móvel --- */
+    .menu-toggle {
+        display: block; /* Mostra o ícone do menu */
+        font-size: 1.5rem;
+        color: var(--color-primary-dark);
+        z-index: 1001; /* Garante que fique acima dos links */
+    }
+
+    .nav-links {
+        /* Posiciona o menu fora da tela */
+        position: fixed;
+        inset: 0 0 0 30%; /* top, right, bottom, left */
+        width: 70%;
+        transform: translateX(100%); /* Começa fora da tela, mais performático */
+        background-color: var(--color-bg-surface);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        transition: transform 0.3s ease-in-out;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    .nav-links.active {
+        right: 0; /* Traz o menu para a tela */
+    }
+
+    .nav-links li {
+        margin: 1.5rem 0;
+    }
+
+    /* --- Seção Hero --- */
+    #hero {
+        height: auto;
+        padding: 8rem 0;
+    }
+
+    /* --- Rodapé --- */
+    footer .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .social-links {
+        margin-top: 1rem;
+    }
+}
+
+/* --- Estilos para a Página de Obrigado --- */
+.thank-you-page {
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 1rem;
+}
+
+.thank-you-page .container {
+    max-width: 600px;
+}
+
+.thank-you-page h1 {
+    font-family: var(--font-primary);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+    color: var(--color-text-light);
+}
+
+.thank-you-page p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.thank-you-page .countdown-text {
+    margin-top: 2rem;
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* --- Estilos para a Página de Obrigado --- */
+.thank-you-page {
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 1rem;
+}
+
+.thank-you-page .container {
+    max-width: 600px;
+}
+
+.thank-you-page h1 {
+    font-family: var(--font-primary);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+    color: var(--color-text-light);
+}
+
+.thank-you-page p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.thank-you-page .countdown-text {
+    margin-top: 2rem;
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* --- Animação de Fade-in na Rolagem --- */
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-element.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
