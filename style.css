@@ -94,7 +94,7 @@ header .container {
 }
 
 .logo img {
-    height: 150px;
+    height: 55px; /* Ajustado para caber confortavelmente no cabeçalho de 70px */
 }
 
 .menu-toggle {
