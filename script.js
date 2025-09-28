@@ -56,13 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Delegação de Eventos: Fecha o menu ao clicar em um link
     navLinks.addEventListener('click', (event) => {
-        if (event.target.tagName === 'A') {
+        if (event.target.tagName === 'A' && navLinks.classList.contains('active')) {
             toggleMenu();
         }
     });
 
     // Acessibilidade: Fecha o menu com a tecla 'Escape'
-    document.addEventListener('keydown', (event) => {
+    window.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && navLinks.classList.contains('active')) {
             toggleMenu();
         }
