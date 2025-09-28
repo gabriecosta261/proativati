@@ -225,6 +225,12 @@ button:focus-visible {
     color: #fff; /* Garante que o parágrafo seja sempre branco */
 }
 
+#hero a{
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #fff; /* Garante que o parágrafo seja sempre branco */
+}
+
 .cta-button {
     display: inline-block;
     background-color: var(--color-primary);
