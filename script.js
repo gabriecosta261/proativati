@@ -136,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
             delay: 5000, // Avança a cada 5 segundos
             disableOnInteraction: false, // Continua o autoplay mesmo após o usuário interagir
         },
-        spaceBetween: 30,
         pagination: {
             el: '.blog-pagination',
             clickable: true,
@@ -145,23 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nextEl: '.blog-button-next',
             prevEl: '.blog-button-prev',
         },
-        breakpoints: {
-            // Configuração para Mobile
-            320: {
-                slidesPerView: 1,
-                slidesPerGroup: 1,
-            },
-            // Configuração para Tablet
-            768: {
-                slidesPerView: 2,
-                slidesPerGroup: 2,
-            },
-            // Configuração para Desktop
-            1024: {
-                slidesPerView: 3,
-                slidesPerGroup: 3,
-            }
-        }
+        slidesPerView: 1,      // Mostra apenas um slide por vez
     });
 
     // --- 7. Lógica do FAQ (Accordion) ---
