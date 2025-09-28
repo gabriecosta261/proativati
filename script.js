@@ -172,6 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameInput = document.getElementById('name');
     const formStatus = document.getElementById('form-status');
 
+    const validateEmail = (email) => /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email);
+    const validateName = (name) => name.trim().length >= 3;
+
     const validateField = (input, validationFn, errorMessageText) => {
         const errorMessage = input.previousElementSibling.querySelector('.error-message');
         const isValid = validationFn(input.value);
@@ -189,9 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
     nameInput.addEventListener('input', () => validateField(nameInput, validateName, ' (mínimo 3 caracteres)'));
     emailInput.addEventListener('input', () => validateField(emailInput, validateEmail, ' (e-mail inválido)'));
 
-
-    const validateEmail = (email) => /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email);
-    const validateName = (name) => name.trim().length >= 3;
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
