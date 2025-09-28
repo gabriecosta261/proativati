@@ -17,10 +17,41 @@
     --transition-main: all 0.3s ease;
 }
 
+/* --- Estilos para o Modo Escuro --- */
+body.dark-mode {
+    --color-primary-dark: #0A2540;
+    --color-primary: #007BFF;
+    --color-primary-light: #3395ff;
+
+    --color-text-dark: #EAEAEA;      /* Texto principal mais claro */
+    --color-text-light: #121212;
+
+    --color-bg: #121212;
+    --color-bg-surface: #1E1E1E;
+
+    --color-shadow: rgba(0, 0, 0, 0.2); /* Sombra mais escura para profundidade */
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* 6. Estilos do Preloader */
+.preloader {
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-primary-dark);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+.preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
 }
 
 html {
@@ -32,6 +63,7 @@ body {
     line-height: 1.6;
     background-color: var(--color-bg);
     color: var(--color-text-dark);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave de cores */
 }
 
 /* --- Utilidades --- */
@@ -45,7 +77,12 @@ body {
 h1, h2, h3 {
     font-family: var(--font-primary);
     font-weight: 700;
-    color: var(--color-primary-dark);
+    color: var(--color-primary-dark); /* Cor padrão para os títulos */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
+    color: var(--color-text-dark); /* Cor branca para títulos no modo escuro */
 }
 
 h2 {
@@ -69,7 +106,7 @@ section {
 header {
     background-color: var(--color-bg-surface);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: fixed; /* Alterado para position: sticky para melhor comportamento */
+    position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
@@ -95,6 +132,30 @@ header .container {
 
 .logo img {
     height: 55px; /* Ajustado para caber confortavelmente no cabeçalho de 70px */
+}
+
+/* Estilo do Botão de Tema */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--color-primary-dark);
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.theme-toggle .fa-sun {
+    display: none; /* Sol escondido por padrão */
+}
+
+body.dark-mode .theme-toggle .fa-sun {
+    display: inline-block; /* Mostra o sol no modo escuro */
+}
+
+body.dark-mode .theme-toggle .fa-moon {
+    display: none; /* Esconde a lua no modo escuro */
 }
 
 .menu-toggle {
@@ -153,7 +214,7 @@ button:focus-visible {
 #hero h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
-    color: var(--color-text-light);
+    color: #fff; /* Garante que o H1 seja sempre branco, independente do tema */
     /* Tipografia Fluida */
     font-size: clamp(2.5rem, 5vw, 3.5rem);
 }
@@ -161,6 +222,7 @@ button:focus-visible {
 #hero p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
+    color: #fff; /* Garante que o parágrafo seja sempre branco */
 }
 
 .cta-button {
@@ -170,10 +232,12 @@ button:focus-visible {
     padding: 12px 24px;
     border-radius: 5px;
     text-decoration: none;
+    position: relative; /* Para a micro-interação */
+    overflow: hidden; /* Para a micro-interação */
     font-weight: 700;
     transition: var(--transition-main);
 }
-
+/* 8. Micro-interação no botão CTA */
 .cta-button:hover {
     background-color: var(--color-primary-light);
 }
@@ -190,23 +254,31 @@ button:focus-visible {
 }
 
 .service-card {
-    background: var(--color-bg-surface);
+    background: var(--color-bg);
     padding: 2rem;
     text-align: center;
     border-radius: 10px;
-    border: 1px solid #e9ecef;
-    box-shadow: none;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    border: 1px solid transparent; /* Borda inicial transparente para evitar "salto" no hover */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
+/* 8. Micro-interação nos cards */
 .service-card:hover {
     transform: translateY(-10px);
     border-color: var(--color-primary);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.12);
 }
 
 .service-card i {
     font-size: 3rem;
     color: var(--color-primary);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover i {
+    transform: scale(1.1) rotate(-5deg);
     margin-bottom: 1rem;
 }
 
@@ -229,18 +301,25 @@ button:focus-visible {
 }
 
 .client-logo {
+    text-decoration: none; /* Remove o sublinhado dos links */
     color: var(--color-text-dark);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 0.75rem;
+    background-color: var(--color-bg-surface);
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 2px 2px 5px var(--color-shadow, rgba(0, 0, 0, 0.08));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .client-logo img,
 .client-logo svg {
     max-width: 150px;
-    height: 60px;
-    width: auto;
+    height: 60px; /* Aumentando a altura para melhor visualização */
     object-fit: contain;
     filter: grayscale(100%);
     opacity: 0.7;
@@ -257,9 +336,12 @@ button:focus-visible {
 .client-logo:hover img, 
 .client-logo:hover svg,
 .client-logo:focus-within img,
-.client-logo:focus-within svg {
+.client-logo:focus-within svg,
+.client-logo:hover {
     filter: grayscale(0%);
     opacity: 1;
+    transform: translateY(-5px);
+    box-shadow: 4px 4px 15px var(--color-shadow, rgba(0, 0, 0, 0.12));
 }
 
 .client-logo:hover .client-name,
@@ -267,6 +349,52 @@ button:focus-visible {
     opacity: 1;
     color: var(--color-primary);
 }
+
+/* --- Seção da Galeria (Carrossel) --- */
+#gallery {
+    background-color: var(--color-bg);
+}
+
+.swiper-container {
+    width: 100%;
+    height: 500px; /* Ajuste a altura conforme necessário */
+    border-radius: 10px;
+    overflow: hidden; /* Garante que as imagens não ultrapassem as bordas arredondadas */
+    box-shadow: 0 0 15px var(--color-shadow, rgba(0, 0, 0, 0.15)); /* Sombra uniforme em todos os lados */
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem cubra todo o slide sem distorcer */
+}
+
+/* Customizando as setas e a paginação com as cores do projeto */
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--color-primary);
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--color-primary);
+}
+
+/* Ajuste para o preloader do Swiper */
+.swiper-lazy-preloader {
+    /* Usa a cor primária do seu site para o spinner de carregamento */
+    --swiper-preloader-color: var(--color-primary);
+}
+
 
 /* --- Seções Sobre e Contato --- */
 #about {
@@ -279,14 +407,63 @@ button:focus-visible {
     margin: 0 auto;
 }
 
+/* 7. Estilos da Seção de FAQ */
+#faq {
+    background-color: var(--color-bg);
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    cursor: pointer;
+    text-align: left;
+}
+
+.faq-question span {
+    font-family: var(--font-primary);
+    font-size: 1.2rem;
+    color: var(--color-text-dark);
+    font-weight: 600;
+}
+
+.faq-question i {
+    color: var(--color-primary);
+    transition: transform 0.3s ease;
+}
+
+.faq-question[aria-expanded="true"] i {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+/* --- Seções Sobre e Contato --- */
 #contact {
     background-color: var(--color-primary-dark);
-    color: var(--color-text-light);
+    color: #fff; /* Garante que a cor base do texto seja sempre branca */
     text-align: center;
 }
 
 #contact h2 {
-    color: var(--color-text-light);
+    color: #fff;
 }
 
 .contact-info p {
@@ -295,7 +472,7 @@ button:focus-visible {
 }
 
 .contact-info a {
-    color: var(--color-text-light);
+    color: #fff;
     text-decoration: none;
     transition: var(--transition-main);
 }
@@ -325,19 +502,19 @@ button:focus-visible {
 
 .service-area-item i {
     font-size: 1.5rem;
-    color: var(--color-bg-surface);
+    color: #fff;
 }
 
 .service-area-text h4 {
     font-family: var(--font-primary);
-    color: var(--color-text-light);
+    color: #fff;
     margin: 0;
     font-size: 1.1rem;
 }
 
 .service-area-text span {
     font-size: 0.9rem;
-    color: var(--color-bg);
+    color: #fff;
 }
 
 /* --- Formulário de Contato --- */
@@ -355,7 +532,19 @@ button:focus-visible {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 700;
-    color: var(--color-bg);
+    color: #fff;
+}
+/* 10. Estilos para Validação do Formulário */
+.form-group label .error-message {
+    color: #ffcdd2;
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+.form-group input.invalid,
+.form-group textarea.invalid {
+    border-color: #ef5350;
 }
 
 .form-group input,
@@ -364,8 +553,8 @@ button:focus-visible {
     padding: 0.8rem;
     border-radius: 5px;
     border: 1px solid var(--color-primary);
-    background-color: var(--color-primary-dark);
-    color: var(--color-text-light);
+    background-color: #fff; /* Fundo branco */
+    color: var(--color-text-dark); /* Texto escuro para contraste */
     font-family: var(--font-secondary);
     font-size: 1rem;
     transition: var(--transition-main);
@@ -386,8 +575,8 @@ button:focus-visible {
 
 /* --- Rodapé --- */
 footer {
-    background-color: var(--color-text-dark);
-    color: var(--color-text-light);
+    background-color: var(--color-bg-surface); /* Fundo claro no modo claro */
+    color: var(--color-text-dark); /* Texto escuro no modo claro */
     padding: 2rem 0;
 }
 
@@ -397,14 +586,23 @@ footer .container {
     align-items: center;
 }
 
+body.dark-mode footer {
+    background-color: #101010; /* Um tom ligeiramente diferente para o rodapé escuro */
+    color: #A0A0A0;
+}
+
 .social-links a {
-    color: var(--color-text-light);
+    color: var(--color-text-dark); /* Cor do ícone no modo claro */
     font-size: 1.5rem;
     margin-left: 15px;
     transition: var(--transition-main);
 }
 
-.social-links a:hover {
+body.dark-mode .social-links a {
+    color: var(--color-text-dark);
+}
+
+.social-links a:hover, body.dark-mode .social-links a:hover {
     color: var(--color-primary-light);
 }
 
@@ -427,11 +625,15 @@ footer .container {
         z-index: 1001; /* Garante que fique acima dos links */
     }
 
+    .nav-controls {
+        order: 1; /* Move os controles para a direita */
+        z-index: 1002;
+    }
+
     .nav-links {
         /* Posiciona o menu fora da tela */
         position: fixed;
-        inset: 0 0 0 30%; /* top, right, bottom, left */
-        width: 70%;
+        inset: 0 0 0 auto; /* top, right, bottom, left */
         transform: translateX(100%); /* Começa fora da tela, mais performático */
         background-color: var(--color-bg-surface);
         flex-direction: column;
@@ -443,7 +645,7 @@ footer .container {
     }
 
     .nav-links.active {
-        right: 0; /* Traz o menu para a tela */
+        transform: translateX(0); /* Traz o menu para a tela */
     }
 
     .nav-links li {
@@ -465,40 +667,6 @@ footer .container {
     .social-links {
         margin-top: 1rem;
     }
-}
-
-/* --- Estilos para a Página de Obrigado --- */
-.thank-you-page {
-    background-color: var(--color-primary-dark);
-    color: var(--color-text-light);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    padding: 1rem;
-}
-
-.thank-you-page .container {
-    max-width: 600px;
-}
-
-.thank-you-page h1 {
-    font-family: var(--font-primary);
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    margin-bottom: 1rem;
-    color: var(--color-text-light);
-}
-
-.thank-you-page p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-}
-
-.thank-you-page .countdown-text {
-    margin-top: 2rem;
-    font-size: 1rem;
-    opacity: 0.8;
 }
 
 /* --- Estilos para a Página de Obrigado --- */

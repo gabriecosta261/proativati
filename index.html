@@ -6,13 +6,12 @@
     <title>Proativa TI | Sua tecnologia sempre um passo à frente</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="A Proativa TI oferece serviços de TI, segurança da informação, soluções em nuvem e suporte técnico para impulsionar o seu negócio. Nós resolvemos antes.">
-    <meta name="keywords" content="TI, segurança da informação, soluções em nuvem, suporte técnico, consultoria de TI, proativa ti">
+    <meta name="description" content="Menos problemas, mais produtividade. Cuidamos da sua tecnologia para você focar no seu negócio. Suporte de TI, segurança e soluções em nuvem.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content="Proativa TI | Sua tecnologia sempre um passo à frente">
     <meta property="og:description" content="Menos problemas, mais produtividade. Cuidamos da sua tecnologia para você focar no seu negócio.">
-    <meta property="og:image" content="https://www.proativati.com.br/imagens/hero-bg.jpg"> <!-- PREENCHA com a URL completa da sua imagem principal -->
+    <meta property="og:image" content="https://tiproativarj.com.br/imagens/logo1_fundo.png">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="imagens/logotipo.png">
@@ -26,20 +25,36 @@
     <link rel="stylesheet" href="style.css">
     <!-- Adicionando Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Adicionando Swiper.js para o carrossel -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 <body>
+
+    <!-- 6. Animação de "Loading" (Preloader) -->
+    <div class="preloader">
+        <img src="imagens/logo1_fundo.png" alt="Logo Proativa TI - Carregando...">
+    </div>
 
     <header>
         <nav class="container">
             <a href="#" class="logo">
                 <img src="imagens/logo1_fundo.png" alt="Logo da Proativa TI">
             </a>
-            <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
-                <i class="fas fa-bars"></i>
-            </button>
+            <div class="nav-controls">
+                <button class="theme-toggle" aria-label="Alternar para o modo escuro">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                    <i class="fas fa-bars fa-times"></i>
+                </button>
+            </div>
             <ul class="nav-links">
                 <li><a href="#services">Serviços</a></li>
                 <li><a href="#about">Sobre Nós</a></li>
+                <li><a href="#gallery">Galeria</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contato</a></li>
             </ul>
         </nav>
@@ -48,7 +63,7 @@
     <main>
         <section id="hero">
             <div class="container">
-                <h1>Inteligência que Antecipa, Suporte que Resolve</h1>
+                <h1>Inteligência que Antecipa,<br>Suporte que Resolve.</h1>
                 <p>Sua tecnologia sempre um passo à frente.</p>
                 <a href="#contact" class="cta-button">Fale com um Especialista</a>
             </div>
@@ -82,15 +97,14 @@
                 <h2 class="fade-in-element">Ferramentas e Sistemas</h2>
                 <p class="section-description fade-in-element">Oferecemos suporte especializado com as principais ferramentas de acesso remoto para os sistemas operacionais mais utilizados no mercado.</p>
                 <div class="clients-grid fade-in-element">
-                    <div class="client-logo">
+                    <a href="https://www.teamviewer.com/pt-br/download/" target="_blank" rel="noopener noreferrer" class="client-logo">
                         <img src="https://cdn.simpleicons.org/teamviewer/007BFF" alt="Logo do TeamViewer">
                         <span class="client-name">TeamViewer</span>
-                    </div>
-                    <div class="client-logo">
-                        <!-- AnyDesk não tem um logo SVG oficial em CDNs populares, usando uma alternativa de alta qualidade -->
-                        <img src="https://img.icons8.com/fluency/96/anydesk.png" alt="Logo do AnyDesk">
+                    </a>
+                    <a href="https://anydesk.com/pt" target="_blank" rel="noopener noreferrer" class="client-logo">
+                        <img src="https://cdn.simpleicons.org/anydesk/ED2025" alt="Logo do AnyDesk">
                         <span class="client-name">AnyDesk</span>
-                    </div>
+                    </a>
                     <div class="client-logo">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Logo do Windows">
                         <span class="client-name">Windows</span>
@@ -112,6 +126,90 @@
                     serviços, mas resultados reais e valor duradouro para nossos clientes. Acreditamos que a tecnologia 
                     é a ferramenta, e a parceria é a chave para o sucesso. Atendemos clientes em todo o Brasil via acesso remoto e oferecemos suporte presencial exclusivo no Rio de Janeiro.
                 </p>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <div class="container">
+                <h2 class="fade-in-element">Nossa Galeria</h2>
+                <p class="section-description fade-in-element">Veja alguns exemplos do nosso trabalho e das soluções que implementamos.</p>
+                
+                <!-- Estrutura do Carrossel Swiper -->
+                <div class="swiper-container fade-in-element">
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide">
+                            <picture class="swiper-lazy">
+                                <source data-srcset="https://images.unsplash.com/photo-1591799264318-7e6e74e3dce9?fm=webp&w=1200" type="image/webp">
+                                <img data-src="https://images.unsplash.com/photo-1591799264318-7e6e74e3dce9?fm=jpg&w=1200" alt="Técnico realizando manutenção de hardware em um computador">
+                            </picture>
+                            <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture class="swiper-lazy">
+                                <source data-srcset="https://images.unsplash.com/photo-1558021211-6514f39794a0?fm=webp&w=1200" type="image/webp">
+                                <img data-src="https://images.unsplash.com/photo-1558021211-6514f39794a0?fm=jpg&w=1200" alt="Profissional de suporte técnico atendendo um cliente por telefone">
+                            </picture>
+                            <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture class="swiper-lazy">
+                                <source data-srcset="https://images.unsplash.com/photo-1529465230221-a0d100462c8c?fm=webp&w=1200" type="image/webp">
+                                <img data-src="https://images.unsplash.com/photo-1529465230221-a0d100462c8c?fm=jpg&w=1200" alt="Cabos de rede conectados a um switch em um data center">
+                            </picture>
+                            <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture class="swiper-lazy">
+                                <source data-srcset="https://images.unsplash.com/photo-1573495627361-d9b87960b12d?fm=webp&w=1200" type="image/webp">
+                                <img data-src="https://images.unsplash.com/photo-1573495627361-d9b87960b12d?fm=jpg&w=1200" alt="Equipe de TI colaborando em frente a um monitor">
+                            </picture>
+                            <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                        </div>
+                    </div>
+                    <!-- Paginação (bolinhas) -->
+                    <div class="swiper-pagination"></div>
+            
+                    <!-- Setas de Navegação -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Seção de FAQ (Perguntas Frequentes) -->
+        <section id="faq">
+            <div class="container">
+                <h2 class="fade-in-element">Perguntas Frequentes</h2>
+                <div class="faq-container fade-in-element">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Vocês atendem pessoas físicas?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sim! Embora nosso foco principal seja o mercado B2B (empresas), também oferecemos suporte técnico especializado para pessoas físicas, tanto remotamente quanto presencialmente no Rio de Janeiro.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Qual o tempo médio para um atendimento?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>O tempo varia conforme a complexidade do problema. Atendimentos remotos para questões de software costumam ser resolvidos em menos de 1 hora. Para diagnósticos de hardware ou problemas de rede, o tempo pode ser maior. Sempre fornecemos uma estimativa inicial.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Vocês oferecem contrato de suporte mensal para empresas?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sim! Oferecemos planos de suporte mensais personalizados para empresas de todos os portes. Esses planos garantem atendimento prioritário, manutenções preventivas e um custo-benefício superior para quem precisa de suporte contínuo. Entre em contato para montarmos um plano ideal para o seu negócio.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -138,15 +236,15 @@
                 <form id="contact-form" action="https://formspree.io/f/xovkjnnn" method="POST" class="fade-in-element">
                     <input type="hidden" name="_next" value="obrigado.html">
                     <div class="form-group">
-                        <label for="name">Nome</label>
-                        <input type="text" id="name" name="name" required>
+                        <label for="name">Nome <span class="error-message"></span></label>
+                        <input type="text" id="name" name="name" required minlength="3">
                     </div>
                     <div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" name="email" required>
+                        <label for="email">E-mail <span class="error-message"></span></label>
+                        <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                     </div>
                     <div class="form-group">
-                        <label for="message">Mensagem</label>
+                        <label for="message">Mensagem <span class="error-message"></span></label>
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
                     <button type="submit" class="cta-button">Enviar Mensagem</button>
@@ -159,9 +257,9 @@
         <div class="container">
             <p>&copy; 2024 Proativa TI. Todos os direitos reservados.</p>
             <div class="social-links">
-                <a href="https://linkedin.com/in/seu-perfil" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/seu-usuario" target="_blank" rel="noopener noreferrer" aria-label="Github"><i class="fab fa-github"></i></a>
-                <a href="https://instagram.com/seu-perfil" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com/company/sua-empresa" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://wa.me/5521982196998" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://instagram.com/seu_usuario" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </footer>
@@ -180,6 +278,9 @@
 </script>
 <!--End of Tawk.to Script-->
 
+    <!-- Adicionando Swiper.js para o carrossel -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <!-- Adicionando o arquivo JavaScript -->
     <script src="script.js"></script>
 
@@ -189,10 +290,10 @@
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Proativa TI",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
-      "url": "https://www.proativati.com.br",
-      "telephone": "+5521999998888",
-      "email": "contato@proativati.com.br",
+      "image": "https://tiproativarj.com.br/imagens/logo1_fundo.png",
+      "url": "https://tiproativarj.com.br",
+      "telephone": "+5521SEUNUMERO",
+      "email": "contato@tiproativarj.com.br",
       "description": "Especialistas em segurança da informação, soluções em nuvem e suporte de TI gerenciado.",
       "address": {
         "@type": "PostalAddress",
