@@ -228,7 +228,7 @@ button:focus-visible {
 #hero a{
     font-size: 1.2rem;
     margin-bottom: 2rem;
-    color: #fff; /* Garante que o parágrafo seja sempre branco */
+    color: #fff
 }
 
 .cta-button {
@@ -285,7 +285,6 @@ button:focus-visible {
 
 .service-card:hover i {
     transform: scale(1.1) rotate(-5deg);
-    margin-bottom: 1rem;
 }
 
 .service-card h3 {
@@ -461,6 +460,86 @@ button:focus-visible {
     transition: max-height 0.4s ease-out;
 }
 
+/* 5. Estilos da Seção de Blog */
+#blog {
+    background-color: var(--color-bg-surface);
+}
+
+.blog-swiper-container {
+    padding-bottom: 3rem; /* Espaço para a paginação */
+}
+
+.blog-post {
+    height: 100%; /* Garante que os slides tenham a mesma altura */
+    background-color: var(--color-bg);
+    display: flex; /* Adicionado para controle de altura interna */
+    flex-direction: column; /* Adicionado para controle de altura interna */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--color-shadow, rgba(0, 0, 0, 0.08));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-post:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px var(--color-shadow, rgba(0, 0, 0, 0.12));
+}
+
+.blog-post img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-content {
+    padding: 1.5rem;
+    flex-grow: 1; /* Faz o conteúdo crescer para preencher o espaço */
+}
+
+.blog-category {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 0.2rem 0.6rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.blog-post h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.read-more i {
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.read-more:hover i {
+    transform: translateX(5px);
+}
+
+/* Customização dos controles do carrossel de blog */
+.blog-pagination.swiper-pagination-bullets {
+    bottom: 0;
+}
+
+.blog-button-prev,
+.blog-button-next {
+    color: var(--color-primary);
+    top: 40%; /* Ajusta a posição vertical das setas */
+}
+
 /* --- Seções Sobre e Contato --- */
 #contact {
     background-color: var(--color-primary-dark);
@@ -553,6 +632,28 @@ button:focus-visible {
     border-color: #ef5350;
 }
 
+.form-footer {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+#contact-form .cta-button {
+    width: auto;
+    min-width: 180px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 7. Estilos do Status do Formulário AJAX */
+#form-status {
+    font-weight: 700;
+    transition: opacity 0.3s ease;
+}
+#form-status.success { color: #a5d6a7; }
+#form-status.error { color: #ef9a9a; }
+
+
 .form-group input,
 .form-group textarea {
     width: 100%;
@@ -571,12 +672,6 @@ button:focus-visible {
     outline: none;
     border-color: var(--color-text-light);
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-}
-
-#contact-form .cta-button {
-    width: 100%;
-    border: none;
-    cursor: pointer;
 }
 
 /* --- Rodapé --- */
@@ -707,16 +802,4 @@ body.dark-mode .social-links a {
     margin-top: 2rem;
     font-size: 1rem;
     opacity: 0.8;
-}
-
-/* --- Animação de Fade-in na Rolagem --- */
-.fade-in-element {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-in-element.visible {
-    opacity: 1;
-    transform: translateY(0);
 }

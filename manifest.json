@@ -1,0 +1,13 @@
+{
+    "name": "Proativa TI",
+    "short_name": "Proativa TI",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#0A2540",
+    "theme_color": "#0A2540",
+    "description": "Suporte de TI, segurança e soluções em nuvem.",
+    "icons": [
+        { "src": "imagens/logotipo.png", "sizes": "192x192", "type": "image/png" },
+        { "src": "imagens/logotipo.png", "sizes": "512x512", "type": "image/png" }
+    ]
+}

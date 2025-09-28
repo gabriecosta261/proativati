@@ -13,6 +13,9 @@
     <meta property="og:description" content="Menos problemas, mais produtividade. Cuidamos da sua tecnologia para você focar no seu negócio.">
     <meta property="og:image" content="https://tiproativarj.com.br/imagens/logo1_fundo.png">
     
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="imagens/logotipo.png">
     <link rel="apple-touch-icon" href="imagens/logotipo.png">
@@ -28,6 +31,7 @@
 
     <!-- Adicionando Swiper.js para o carrossel -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
 </head>
 <body>
 
@@ -38,7 +42,7 @@
 
     <header>
         <nav class="container">
-            <a href="#" class="logo">
+            <a href="#hero" class="logo">
                 <img src="imagens/logo1_fundo.png" alt="Logo da Proativa TI">
             </a>
             <div class="nav-controls">
@@ -54,6 +58,7 @@
                 <li><a href="#services">Serviços</a></li>
                 <li><a href="#about">Sobre Nós</a></li>
                 <li><a href="#gallery">Galeria</a></li>
+                <li><a href="#blog">Blog</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contato</a></li>
             </ul>
@@ -63,7 +68,7 @@
     <main>
         <section id="hero">
             <div class="container">
-                <h1>Inteligência que Antecipa,<br>Suporte que Resolve.</h1>
+                <h1 class="gsap-reveal">Inteligência que Antecipa,<br>Suporte que Resolve.</h1>
                 <p>Sua tecnologia sempre um passo à frente.</p>
                 <a href="#contact" class="cta-button">Fale com um Especialista</a>
             </div>
@@ -71,19 +76,19 @@
 
         <section id="services">
             <div class="container">
-                <h2 class="fade-in-element">Nossos Serviços</h2>
+                <h2 class="gsap-reveal">Nossos Serviços</h2>
                 <div class="services-grid">
-                    <div class="service-card fade-in-element">
+                    <div class="service-card gsap-reveal">
                         <i class="fas fa-cogs"></i>
                         <h3>Manutenção e Otimização</h3>
                         <p>Formatação, instalação de softwares, drivers e programas diversos para garantir a máxima performance dos seus equipamentos.</p>
                     </div>
-                    <div class="service-card fade-in-element">
+                    <div class="service-card gsap-reveal">
                         <i class="fas fa-desktop"></i>
                         <h3>Hardware e Upgrades</h3>
                         <p>Instalação, troca e remanejamento de componentes e periféricos para manter seu hardware sempre atualizado e funcional.</p>
                     </div>
-                    <div class="service-card fade-in-element">
+                    <div class="service-card gsap-reveal">
                         <i class="fas fa-network-wired"></i>
                         <h3>Redes Locais</h3>
                         <p>Projetamos, instalamos e gerenciamos redes locais cabeadas e Wi-Fi para garantir uma conexão estável e segura para sua empresa.</p>
@@ -94,9 +99,9 @@
 
         <section id="clients">
             <div class="container">
-                <h2 class="fade-in-element">Ferramentas e Sistemas</h2>
-                <p class="section-description fade-in-element">Oferecemos suporte especializado com as principais ferramentas de acesso remoto para os sistemas operacionais mais utilizados no mercado.</p>
-                <div class="clients-grid fade-in-element">
+                <h2 class="gsap-reveal">Ferramentas e Sistemas</h2>
+                <p class="section-description gsap-reveal">Oferecemos suporte especializado com as principais ferramentas de acesso remoto para os sistemas operacionais mais utilizados no mercado.</p>
+                <div class="clients-grid gsap-reveal">
                     <a href="https://www.teamviewer.com/pt-br/download/" target="_blank" rel="noopener noreferrer" class="client-logo">
                         <img src="https://cdn.simpleicons.org/teamviewer/007BFF" alt="Logo do TeamViewer">
                         <span class="client-name">TeamViewer</span>
@@ -105,7 +110,7 @@
                         <img src="https://cdn.simpleicons.org/anydesk/ED2025" alt="Logo do AnyDesk">
                         <span class="client-name">AnyDesk</span>
                     </a>
-                    <div class="client-logo">
+                    <div class="client-logo ">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Logo do Windows">
                         <span class="client-name">Windows</span>
                     </div>
@@ -119,8 +124,8 @@
 
         <section id="about">
             <div class="container">
-                <h2 class="fade-in-element">Sobre Nós</h2>
-                <p class="fade-in-element">
+                <h2 class="gsap-reveal">Sobre Nós</h2>
+                <p class="gsap-reveal">
                     A <strong>Proativa TI</strong> nasceu da paixão por tecnologia e do desejo de ajudar empresas a prosperar na era digital. 
                     Com uma equipe de especialistas certificados e anos de experiência, nosso compromisso é entregar não apenas 
                     serviços, mas resultados reais e valor duradouro para nossos clientes. Acreditamos que a tecnologia 
@@ -131,11 +136,11 @@
 
         <section id="gallery">
             <div class="container">
-                <h2 class="fade-in-element">Nossa Galeria</h2>
-                <p class="section-description fade-in-element">Veja alguns exemplos do nosso trabalho e das soluções que implementamos.</p>
+                <h2 class="gsap-reveal">Nossa Galeria</h2>
+                <p class="section-description gsap-reveal">Veja alguns exemplos do nosso trabalho e das soluções que implementamos.</p>
                 
                 <!-- Estrutura do Carrossel Swiper -->
-                <div class="swiper-container fade-in-element">
+                <div class="swiper-container gsap-reveal">
                     <div class="swiper-wrapper">
                         <!-- Slides -->
                         <div class="swiper-slide">
@@ -177,11 +182,108 @@
             </div>
         </section>
 
+        <!-- 5. Seção de Blog -->
+        <section id="blog">
+            <div class="container">
+                <h2 class="gsap-reveal">Nosso Blog</h2>
+                <p class="section-description gsap-reveal">Dicas, notícias e insights do mundo da tecnologia para manter você e sua empresa atualizados.</p>
+                <div class="swiper-container blog-swiper-container gsap-reveal">
+                    <div class="swiper-wrapper">
+                        <article class="swiper-slide blog-post">
+                            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1170" alt="Pessoa usando notebook em uma mesa de trabalho">
+                            <div class="blog-content">
+                                <span class="blog-category">Produtividade</span>
+                                <h3>5 Dicas para Acelerar seu Computador</h3>
+                                <p>Descubra truques simples para melhorar a performance da sua máquina e aumentar sua produtividade no dia a dia.</p>
+                                <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        <article class="swiper-slide blog-post">
+                            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1170" alt="Cadeado digital sobre um teclado de notebook">
+                            <div class="blog-content">
+                                <span class="blog-category">Segurança</span>
+                                <h3>Phishing: Como se Proteger de E-mails Falsos</h3>
+                                <p>Aprenda a reconhecer os sinais de um e-mail de phishing e proteja suas informações contra os golpes mais comuns.</p>
+                                <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        <article class="swiper-slide blog-post">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1172" alt="Vários dispositivos eletrônicos em uma mesa">
+                            <div class="blog-content">
+                                <span class="blog-category">Cloud</span>
+                                <h3>A Nuvem é para sua Empresa? Mitos e Verdades</h3>
+                                <p>Entenda os benefícios reais da computação em nuvem e como ela pode transformar a gestão de dados do seu negócio.</p>
+                                <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        <article class="swiper-slide blog-post">
+                            <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b?q=80&w=1170" alt="Equipe de TI trabalhando em colaboração">
+                            <div class="blog-content">
+                                <span class="blog-category">Suporte de TI</span>
+                                <h3>Por que Terceirizar o Suporte de TI da sua Empresa?</h3>
+                                <p>Veja como um suporte de TI gerenciado pode reduzir custos, aumentar a eficiência e a segurança da sua operação.</p>
+                                <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        <article class="swiper-slide blog-post">
+                            <img src="https://images.unsplash.com/photo-1611078489935-9cb5b1c243a4?q=80&w=1170" alt="Discos de armazenamento de dados (HDs)">
+                            <div class="blog-content">
+                                <span class="blog-category">Backup</span>
+                                <h3>A Importância do Backup Regular de Dados</h3>
+                                <p>Não espere o desastre acontecer. Entenda por que uma rotina de backup é vital para a sobrevivência do seu negócio.</p>
+                                <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        <article class="swiper-slide blog-post">
+                            <img src="https://images.unsplash.com/photo-1589987607627-612c7243c8d8?q=80&w=1170" alt="Pessoa trabalhando de casa em um notebook">
+                            <div class="blog-content">
+                                <span class="blog-category">Home Office</span>
+                                <h3>Ferramentas Essenciais para um Home Office Produtivo</h3>
+                                <p>Conheça os softwares e equipamentos que podem transformar seu trabalho remoto, garantindo segurança e eficiência.</p>
+                                <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        <article class="swiper-slide blog-post">
+                            <img src="https://images.unsplash.com/photo-1562813733-b31f71025d54?q=80&w=1169" alt="Luzes de rede abstratas representando segurança">
+                            <div class="blog-content">
+                                <span class="blog-category">Segurança</span>
+                                <h3>Firewall: A Muralha Essencial para sua Rede</h3>
+                                <p>Entenda o que é um firewall e por que ele é a primeira linha de defesa indispensável para proteger os dados da sua empresa.</p>
+                                <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        <article class="swiper-slide blog-post">
+                            <img src="https://images.unsplash.com/photo-1593152167538-3c2d839a2353?q=80&w=1074" alt="Um drive de estado sólido (SSD) em close-up">
+                            <div class="blog-content">
+                                <span class="blog-category">Hardware</span>
+                                <h3>SSD vs. HDD: Qual a Melhor Escolha para seu PC?</h3>
+                                <p>Performance, velocidade e durabilidade. Compare as duas tecnologias de armazenamento e decida qual upgrade faz mais sentido.</p>
+                                <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        <article class="swiper-slide blog-post">
+                            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1170" alt="Pessoas colaborando em notebooks em uma reunião">
+                            <div class="blog-content">
+                                <span class="blog-category">Gestão de TI</span>
+                                <h3>5 Sinais de que sua Empresa Precisa de Suporte de TI</h3>
+                                <p>Lentidão constante e problemas recorrentes? Saiba quando é a hora de investir em um suporte profissional para não parar de crescer.</p>
+                                <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                    </div>
+                    <!-- Paginação e Navegação do Carrossel de Blog -->
+                    <div class="swiper-pagination blog-pagination"></div>
+                    <div class="swiper-button-prev blog-button-prev"></div>
+                    <div class="swiper-button-next blog-button-next"></div>
+                </div>
+            </div>
+        </section>
+
         <!-- 7. Seção de FAQ (Perguntas Frequentes) -->
         <section id="faq">
             <div class="container">
-                <h2 class="fade-in-element">Perguntas Frequentes</h2>
-                <div class="faq-container fade-in-element">
+                <h2 class="gsap-reveal">Perguntas Frequentes</h2>
+                <div class="faq-container gsap-reveal">
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>Vocês atendem pessoas físicas?</span>
@@ -215,9 +317,10 @@
 
         <section id="contact">
             <div class="container">
-                <h2 class="fade-in-element">Entre em Contato</h2>
-                <p class="fade-in-element">Tem um projeto em mente ou precisa de suporte? Preencha o formulário e retornaremos em breve.</p>
-                <div class="service-area-container fade-in-element">
+                <h2 class="gsap-reveal">Entre em Contato</h2>
+                <p class="gsap-reveal">Tem um projeto em mente ou precisa de suporte? Preencha o formulário e retornaremos em breve.</p>
+                
+                <div class="service-area-container gsap-reveal">
                     <div class="service-area-item">
                         <i class="fas fa-globe-americas"></i>
                         <div class="service-area-text">
@@ -233,7 +336,7 @@
                         </div>
                     </div>
                 </div>
-                <form id="contact-form" action="https://formspree.io/f/xovkjnnn" method="POST" class="fade-in-element">
+                <form id="contact-form" class="gsap-reveal">
                     <input type="hidden" name="_next" value="obrigado.html">
                     <div class="form-group">
                         <label for="name">Nome <span class="error-message"></span></label>
@@ -247,7 +350,10 @@
                         <label for="message">Mensagem <span class="error-message"></span></label>
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="cta-button">Enviar Mensagem</button>
+                    <div class="form-footer">
+                        <button type="submit" class="cta-button">Enviar Mensagem</button>
+                        <div id="form-status"></div>
+                    </div>
                 </form>
             </div>
         </section>
@@ -280,6 +386,10 @@
 
     <!-- Adicionando Swiper.js para o carrossel -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Adicionando GSAP e ScrollTrigger para animações -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!-- Adicionando o arquivo JavaScript -->
     <script src="script.js"></script>

@@ -1,5 +1,12 @@
 // --- 6. Lógica do Preloader ---
 window.addEventListener('load', () => {
+    // 9. Registra o Service Worker para PWA
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => console.log('Service Worker registrado com sucesso:', registration))
+            .catch(error => console.log('Falha ao registrar Service Worker:', error));
+    }
+
     const preloader = document.querySelector('.preloader');
     if (preloader) {
         preloader.classList.add('hidden');
@@ -23,16 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-
-        let theme = 'light';
-        let ariaLabel = 'Alternar para o modo escuro';
-
-        if (document.body.classList.contains('dark-mode')) {
-            theme = 'dark';
-            ariaLabel = 'Alternar para o modo claro';
-        }
         
-        localStorage.setItem('theme', theme);
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        const ariaLabel = isDarkMode ? 'Alternar para o modo claro' : 'Alternar para o modo escuro';
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
         themeToggle.setAttribute('aria-label', ariaLabel);
     });
 
@@ -67,29 +68,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Animação de Fade-in na Rolagem ---
-    // O código do Intersection Observer já é moderno e eficiente,
-    // portanto, foi mantido como está.
-    const fadeInElements = document.querySelectorAll('.fade-in-element');
-
-    const observerOptions = {
-        root: null, // Observa em relação ao viewport
-        rootMargin: '0px',
-        threshold: 0.1 // Ativa quando 10% do elemento está visível
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                // Para a observação do elemento após ele se tornar visível
-                observer.unobserve(entry.target);
+    // --- 8. Animações com GSAP e ScrollTrigger ---
+    gsap.registerPlugin(ScrollTrigger);
+    const revealElements = document.querySelectorAll('.gsap-reveal');
+    revealElements.forEach(el => {
+        gsap.fromTo(el, {
+            y: 50,
+            opacity: 0
+        }, {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            scrollTrigger: {
+                trigger: el,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
             }
         });
-    }, observerOptions);
-
-    fadeInElements.forEach(el => observer.observe(el));
-
+    });
+    
     // --- Lógica para o Cabeçalho que Reaparece ---
     const header = document.querySelector('header');
     let lastScrollY = window.scrollY;
@@ -113,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Opções
         loop: true, // Permite que o carrossel volte ao início
         autoplay: {
-            delay: 5000, // Passa para o próximo slide a cada 5 segundos
+            delay: 2500, // Passa para o próximo slide a cada 5 segundos
             disableOnInteraction: false, // Continua o autoplay mesmo após interação do usuário
         },
         // Habilita o Lazy Loading
@@ -129,6 +126,42 @@ document.addEventListener('DOMContentLoaded', () => {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
+    });
+
+    // --- Inicialização do Carrossel do Blog ---
+    const blogSwiper = new Swiper('.blog-swiper-container', {
+        loop: true,
+        observer: true, // Recalcula o layout se houver mudanças (ex: troca de tema)
+        autoplay: {
+            delay: 5000, // Avança a cada 5 segundos
+            disableOnInteraction: false, // Continua o autoplay mesmo após o usuário interagir
+        },
+        spaceBetween: 30,
+        pagination: {
+            el: '.blog-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.blog-button-next',
+            prevEl: '.blog-button-prev',
+        },
+        breakpoints: {
+            // Configuração para Mobile
+            320: {
+                slidesPerView: 1,
+                slidesPerGroup: 1,
+            },
+            // Configuração para Tablet
+            768: {
+                slidesPerView: 2,
+                slidesPerGroup: 2,
+            },
+            // Configuração para Desktop
+            1024: {
+                slidesPerView: 3,
+                slidesPerGroup: 3,
+            }
+        }
     });
 
     // --- 7. Lógica do FAQ (Accordion) ---
@@ -150,42 +183,66 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 10. Validação do Formulário em Tempo Real ---
+    // --- 7. Envio de Formulário com AJAX e Validação ---
     const form = document.getElementById('contact-form');
     const emailInput = document.getElementById('email');
     const nameInput = document.getElementById('name');
+    const formStatus = document.getElementById('form-status');
 
-    const validateField = (input, validationFn) => {
+    const validateField = (input, validationFn, errorMessageText) => {
         const errorMessage = input.previousElementSibling.querySelector('.error-message');
-        if (validationFn(input.value)) {
+        const isValid = validationFn(input.value);
+        if (isValid) {
             input.classList.remove('invalid');
             if (errorMessage) errorMessage.textContent = '';
-            return true;
         } else {
             input.classList.add('invalid');
-            return false;
+            if (errorMessage) errorMessage.textContent = errorMessageText;
         }
+        return isValid;
     };
+
+    // Validação em tempo real enquanto o usuário digita
+    nameInput.addEventListener('input', () => validateField(nameInput, validateName, ' (mínimo 3 caracteres)'));
+    emailInput.addEventListener('input', () => validateField(emailInput, validateEmail, ' (e-mail inválido)'));
+
 
     const validateEmail = (email) => /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email);
     const validateName = (name) => name.trim().length >= 3;
 
-    emailInput.addEventListener('input', () => validateField(emailInput, validateEmail));
-    nameInput.addEventListener('input', () => validateField(nameInput, validateName));
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-    form.addEventListener('submit', (event) => {
-        const isNameValid = validateField(nameInput, validateName);
-        const isEmailValid = validateField(emailInput, validateEmail);
+        const isNameValid = validateField(nameInput, validateName, ' (mínimo 3 caracteres)');
+        const isEmailValid = validateField(emailInput, validateEmail, ' (e-mail inválido)');
 
-        if (!isNameValid) {
-            nameInput.previousElementSibling.querySelector('.error-message').textContent = ' (mínimo 3 caracteres)';
-        }
-        if (!isEmailValid) {
-            emailInput.previousElementSibling.querySelector('.error-message').textContent = ' (e-mail inválido)';
-        }
+        if (!isNameValid || !isEmailValid) return;
 
-        if (!isNameValid || !isEmailValid) {
-            event.preventDefault(); // Impede o envio do formulário se for inválido
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+
+        try {
+            const response = await fetch('https://formspree.io/f/xovkjnnn', {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                formStatus.textContent = 'Mensagem enviada com sucesso!';
+                formStatus.className = 'success';
+                form.reset();
+            } else {
+                throw new Error('Falha no envio');
+            }
+        } catch (error) {
+            formStatus.textContent = 'Ocorreu um erro. Tente novamente.';
+            formStatus.className = 'error';
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Enviar Mensagem';
+            setTimeout(() => formStatus.textContent = '', 5000);
         }
     });
 });
