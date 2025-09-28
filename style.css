@@ -232,7 +232,7 @@ button:focus-visible {
 
     display: inline-block;
     background-color: var(--color-primary);
-    color: var(--color-text-light);
+    color: #fff; /* Garante que o texto do botão seja sempre branco */
     padding: 12px 24px;
     border-radius: 5px;
     text-decoration: none;
@@ -472,13 +472,8 @@ button:focus-visible {
 
 .blog-post {
     height: 100%; /* Garante que os slides tenham a mesma altura */
-    background-color: transparent; /* Remove o fundo do card */
-    display: flex; /* Adicionado para controle de altura interna */
-    flex-direction: column; /* Adicionado para controle de altura interna */
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px var(--color-shadow, rgba(0, 0, 0, 0.08));
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Essencial para o posicionamento do conteúdo */
+    background-color: var(--color-primary-dark); /* Cor de fundo enquanto a imagem carrega */
 }
 
 .blog-post img {
