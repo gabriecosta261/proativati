@@ -128,27 +128,94 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     });
 
-    // --- Inicialização do Carrossel do Blog ---
-    const blogSwiper = new Swiper('.blog-swiper-container', {
-        loop: true,
-        observer: true, // Recalcula o layout se houver mudanças (ex: troca de tema)
-        autoplay: {
-            delay: 5000, // Avança a cada 5 segundos
-            disableOnInteraction: false, // Continua o autoplay mesmo após o usuário interagir
-        },
-        pagination: {
-            el: '.blog-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.blog-button-next',
-            prevEl: '.blog-button-prev',
-        },
-        slidesPerView: 1,      // Mostra apenas um slide por vez
-    });
+    // --- Lógica para buscar e exibir posts do blog ---
+    let blogSwiper; // Declara a variável do swiper aqui
+    // --- Lógica para buscar e exibir posts do blog ---
+    async function fetchAndDisplayBlogPosts() {
+        const blogWrapper = document.querySelector('.blog-swiper-container .swiper-wrapper');
+        if (!blogWrapper) return;
+
+        // Verifica se a página está sendo servida por um servidor (http) e não localmente (file://)
+        if (window.location.protocol === 'file:') {
+            blogWrapper.innerHTML = '<div class="blog-loading">A busca de notícias funciona apenas em um servidor web.</div>';
+            console.warn('A busca de notícias foi desativada no ambiente local (file://). Use um servidor de desenvolvimento.');
+            return;
+        }
+
+        try {
+            // A URL aponta para a nossa função serverless (o intermediário)
+            const response = await fetch('/api/get-news'); 
+            if (!response.ok) throw new Error('Falha ao carregar notícias.');
+
+            const articles = await response.json();
+
+            // Limpa a mensagem de "Carregando..."
+            blogWrapper.innerHTML = ''; 
+
+            articles.forEach(article => {
+                // Usa uma imagem padrão caso o artigo não tenha uma
+                const imageUrl = article.urlToImage || 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1172';
+                
+                const postHTML = `
+                    <article class="swiper-slide blog-post">
+                        <img src="${imageUrl}" alt="${article.title || 'Imagem da notícia'}">
+                        <div class="blog-content">
+                            <span class="blog-category">Tecnologia</span>
+                            <h3>${article.title}</h3>
+                            <p>${article.description || 'Clique para ler mais.'}</p>
+                            <a href="${article.url}" target="_blank" rel="noopener noreferrer" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                `;
+                blogWrapper.insertAdjacentHTML('beforeend', postHTML);
+            });
+
+            // Inicializa o Swiper do blog APENAS se houver artigos
+            if (articles.length > 0 && !blogSwiper) {
+                blogSwiper = new Swiper('.blog-swiper-container', {
+                    observer: true,
+                    loop: true,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.blog-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.blog-button-next',
+                        prevEl: '.blog-button-prev',
+                    },
+                    slidesPerView: 1,
+                });
+                blogSwiper.autoplay.start();
+            }
+
+        } catch (error) {            
+            // Verifica se o erro foi um 404 (Not Found), comum em servidores de desenvolvimento locais como o Live Server.
+            if (error.message.includes('404')) {
+                blogWrapper.innerHTML = '<div class="blog-loading">A busca de notícias está funcionando! Ela será ativada quando o site for publicado.</div>';
+            } else {
+                blogWrapper.innerHTML = '<div class="blog-loading">Não foi possível carregar as notícias. Tente novamente mais tarde.</div>';
+            }
+            console.error('Erro ao buscar posts do blog:', error);
+        }
+    }
 
     // --- 7. Lógica do FAQ (Accordion) ---
     const faqItems = document.querySelectorAll('.faq-item');
+
+    // Inicializa o estado de acessibilidade dos painéis de resposta
+    faqItems.forEach(item => {
+        const answer = item.querySelector('.faq-answer');
+        const questionButton = item.querySelector('.faq-question');
+        const isExpanded = questionButton.getAttribute('aria-expanded') === 'true';
+
+        if (!isExpanded) {
+            answer.setAttribute('aria-hidden', 'true');
+        }
+    });
 
     faqItems.forEach(item => {
         const questionButton = item.querySelector('.faq-question');
@@ -156,26 +223,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         questionButton?.addEventListener('click', () => {
             const isExpanded = questionButton.getAttribute('aria-expanded') === 'true';
-            
-            questionButton.setAttribute('aria-expanded', !isExpanded);
-            if (!isExpanded) {
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-            } else {
-                answer.style.maxHeight = '0px';
-            }
+            questionButton.setAttribute('aria-expanded', String(!isExpanded));
+            answer.setAttribute('aria-hidden', String(isExpanded));
+            answer.style.maxHeight = !isExpanded ? answer.scrollHeight + 'px' : '0px';
         });
     });
+
+    // Chama a função para carregar os posts do blog
+    fetchAndDisplayBlogPosts();
 
     // --- 7. Envio de Formulário com AJAX e Validação ---
     const form = document.getElementById('contact-form');
     const emailInput = document.getElementById('email');
     const nameInput = document.getElementById('name');
+    const messageInput = document.getElementById('message'); // 1. Adicionar o campo de mensagem
     const formStatus = document.getElementById('form-status');
 
     const validateEmail = (email) => /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email);
     const validateName = (name) => name.trim().length >= 3;
+    const validateMessage = (message) => message.trim().length >= 10; // 1. Adicionar validação para a mensagem
 
     const validateField = (input, validationFn, errorMessageText) => {
+        if (!input) return true; // Retorna true se o campo não existir para não quebrar o script
         const errorMessage = input.previousElementSibling.querySelector('.error-message');
         const isValid = validationFn(input.value);
         if (isValid) {
@@ -191,6 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Validação em tempo real enquanto o usuário digita
     nameInput.addEventListener('input', () => validateField(nameInput, validateName, ' (mínimo 3 caracteres)'));
     emailInput.addEventListener('input', () => validateField(emailInput, validateEmail, ' (e-mail inválido)'));
+    messageInput.addEventListener('input', () => validateField(messageInput, validateMessage, ' (mínimo 10 caracteres)')); // 1. Adicionar validação em tempo real para a mensagem
 
 
     form.addEventListener('submit', async (event) => {
@@ -198,8 +268,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const isNameValid = validateField(nameInput, validateName, ' (mínimo 3 caracteres)');
         const isEmailValid = validateField(emailInput, validateEmail, ' (e-mail inválido)');
+        const isMessageValid = validateField(messageInput, validateMessage, ' (mínimo 10 caracteres)'); // 1. Validar a mensagem
 
-        if (!isNameValid || !isEmailValid) return;
+        if (!isNameValid || !isEmailValid || !isMessageValid) return; // 1. Checar se todos os campos são válidos
 
         const submitButton = form.querySelector('button[type="submit"]');
         submitButton.disabled = true;
@@ -213,9 +284,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.ok) {
-                formStatus.textContent = 'Mensagem enviada com sucesso!';
-                formStatus.className = 'success';
-                form.reset();
+                // 2. Redireciona para a página de obrigado em vez de mostrar a mensagem
+                window.location.href = form.querySelector('input[name="_next"]').value || 'obrigado.html';
             } else {
                 throw new Error('Falha no envio');
             }

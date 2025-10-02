@@ -1,6 +1,10 @@
+# Ignorar dependências que podem ser instaladas depois
+node_modules/
+
+# Arquivos de configuração de editores de código
+.vscode/
+.idea/
+
 # Arquivos de sistema operacional
 .DS_Store
 Thumbs.db
-
-# Arquivos de configuração de editores
-.vscode/

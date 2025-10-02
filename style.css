@@ -531,6 +531,16 @@ body.dark-mode .blog-post h3 {
     transform: translateX(5px);
 }
 
+/* Estilo para o estado de carregamento do blog */
+.blog-loading {
+    width: 100%;
+    text-align: center;
+    padding: 4rem 0;
+    font-size: 1.2rem;
+    color: var(--color-text-dark);
+    opacity: 0.8;
+}
+
 /* Customização dos controles do carrossel de blog */
 .blog-pagination.swiper-pagination-bullets {
     bottom: 10px;

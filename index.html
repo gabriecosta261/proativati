@@ -51,7 +51,7 @@
                     <i class="fas fa-sun"></i>
                 </button>
                 <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
-                    <i class="fas fa-bars fa-times"></i>
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
             <ul class="nav-links">
@@ -189,33 +189,8 @@
                 <p class="section-description gsap-reveal">Dicas, notícias e insights do mundo da tecnologia para manter você e sua empresa atualizados.</p>
                 <div class="swiper-container blog-swiper-container gsap-reveal">
                     <div class="swiper-wrapper">
-                        <article class="swiper-slide blog-post">
-                            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1170" alt="Pessoa usando notebook em uma mesa de trabalho">
-                            <div class="blog-content">
-                                <span class="blog-category">Produtividade</span>
-                                <h3>5 Dicas para Acelerar seu Computador</h3>
-                                <p>Descubra truques simples para melhorar a performance da sua máquina e aumentar sua produtividade no dia a dia.</p>
-                                <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </article>
-                        <article class="swiper-slide blog-post">
-                            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1170" alt="Cadeado digital sobre um teclado de notebook">
-                            <div class="blog-content">
-                                <span class="blog-category">Segurança</span>
-                                <h3>Phishing: Como se Proteger de E-mails Falsos</h3>
-                                <p>Aprenda a reconhecer os sinais de um e-mail de phishing e proteja suas informações contra os golpes mais comuns.</p>
-                                <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </article>
-                        <article class="swiper-slide blog-post">
-                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1172" alt="Vários dispositivos eletrônicos em uma mesa">
-                            <div class="blog-content">
-                                <span class="blog-category">Cloud</span>
-                                <h3>A Nuvem é para sua Empresa? Mitos e Verdades</h3>
-                                <p>Entenda os benefícios reais da computação em nuvem e como ela pode transformar a gestão de dados do seu negócio.</p>
-                                <a href="#" class="read-more">Leia Mais <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </article>
+                        <!-- Os posts do blog serão inseridos aqui pelo JavaScript -->
+                        <div class="blog-loading">Carregando notícias...</div>
                     </div>
                     <!-- Paginação e Navegação do Carrossel de Blog -->
                     <div class="swiper-pagination blog-pagination"></div>
@@ -231,29 +206,29 @@
                 <h2 class="gsap-reveal">Perguntas Frequentes</h2>
                 <div class="faq-container gsap-reveal">
                     <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
+                        <button class="faq-question" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1">
                             <span>Vocês atendem pessoas físicas?</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
                             <p>Sim! Embora nosso foco principal seja o mercado B2B (empresas), também oferecemos suporte técnico especializado para pessoas físicas, tanto remotamente quanto presencialmente no Rio de Janeiro.</p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
+                        <button class="faq-question" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">
                             <span>Qual o tempo médio para um atendimento?</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
                             <p>O tempo varia conforme a complexidade do problema. Atendimentos remotos para questões de software costumam ser resolvidos em menos de 1 hora. Para diagnósticos de hardware ou problemas de rede, o tempo pode ser maior. Sempre fornecemos uma estimativa inicial.</p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
+                        <button class="faq-question" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">
                             <span>Vocês oferecem contrato de suporte mensal para empresas?</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
                             <p>Sim! Oferecemos planos de suporte mensais personalizados para empresas de todos os portes. Esses planos garantem atendimento prioritário, manutenções preventivas e um custo-benefício superior para quem precisa de suporte contínuo. Entre em contato para montarmos um plano ideal para o seu negócio.</p>
                         </div>
                     </div>
