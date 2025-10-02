@@ -105,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScrollY = currentScrollY;
     });
 
-    // --- Inicialização do Carrossel Swiper.js ---
-    const swiper = new Swiper('.swiper-container', {
+    // --- Inicialização do Carrossel da Galeria ---
+    const swiper = new Swiper('.gallery-swiper-container', {
         // Opções
         loop: true, // Permite que o carrossel volte ao início
         autoplay: {

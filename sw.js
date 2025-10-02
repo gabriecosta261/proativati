@@ -34,14 +34,17 @@ self.addEventListener('fetch', event => {
 
             // Se não estiver no cache, busca na rede.
             return fetch(event.request).then(networkResponse => {
-                // Opcional: Adicionar a nova resposta ao cache para futuras requisições.
-                // Cuidado ao fazer isso para todas as requisições (ex: APIs POST).
-                // Aqui, é seguro para as requisições GET que não foram cacheadas inicialmente.
-                return caches.open(CACHE_NAME).then(cache => {
-                    // Clona a resposta, pois ela só pode ser consumida uma vez.
-                    cache.put(event.request, networkResponse.clone());
-                    return networkResponse;
-                });
+                // Só adiciona ao cache se a requisição for do tipo GET.
+                if (event.request.method === 'GET') {
+                    // Opcional: Adicionar a nova resposta ao cache para futuras requisições.
+                    return caches.open(CACHE_NAME).then(cache => {
+                        // Clona a resposta, pois ela é um stream e só pode ser consumida uma vez.
+                        cache.put(event.request, networkResponse.clone());
+                        return networkResponse;
+                    });
+                }
+                // Para requisições não-GET (como POST), apenas retorna a resposta da rede sem salvar no cache.
+                return networkResponse;
             })
             .catch(() => {
                 // Opcional: Retornar uma página de fallback offline se a rede falhar.
